@@ -1,5 +1,18 @@
 [phases.setup]
-aptPkgs = ["default-libmysqlclient-dev", "pkg-config", "build-essential"]
+aptPkgs = [
+    "python3-dev",
+    "libmariadb-dev",
+    "libmariadb-dev-compat",
+    "pkg-config",
+    "build-essential"
+]
+
+[phases.install]
+cmds = [
+    "python -m venv --copies /opt/venv",
+    ". /opt/venv/bin/activate",
+    "pip install -r requirements.txt"
+]
 
 [start]
 cmd = "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
