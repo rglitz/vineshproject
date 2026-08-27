@@ -1,2 +1,5 @@
 [phases.setup]
 aptPkgs = ["default-libmysqlclient-dev", "pkg-config", "build-essential"]
+
+[start]
+cmd = "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
